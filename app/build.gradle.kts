@@ -6,8 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.moviesapp"
-    compileSdk = 34
-
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.example.moviesapp"
         minSdk = 26
@@ -56,4 +55,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.logging)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 }
