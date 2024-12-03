@@ -1,18 +1,14 @@
 package com.example.moviesapp
 
 import com.example.moviesapp.Retrofit.RetrofitBuilder
-//import okhttp3.Response
 
-//import com.example.moviesapp.Retrofit.RetrofitBuilder
-//import com.example.moviesapp.data.
-import retrofit2.Response
 
 class Repository {
     private val apiServices = RetrofitBuilder.getApi
 
     suspend fun getPopularMovies() : List<TopMoviesItem> {
         return apiServices.getPopularMovies(
-            api_key  = "8d1b32baa7msh19f98cbae135b25p106853jsnde9baf15d6fd",
+            api_key  = "d9358b8fc5msh8f38a46215dad90p1da515jsn48c1a158ac79",
             host = "imdb-top-100-movies.p.rapidapi.com"
         )
     }
