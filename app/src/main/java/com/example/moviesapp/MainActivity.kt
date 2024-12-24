@@ -23,6 +23,7 @@ import com.example.moviesapp.ui.theme.MoviesAppTheme
 import kotlin.getValue
 //import com.example.moviesapp.TmdbResponse
 import android.R.attr.text
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.view.Display
 import androidx.compose.foundation.Image
@@ -203,12 +204,13 @@ fun MovieCard(movie: TopMoviesItem,navController: NavController){
         })
     ) {
         if(!movie.image.isEmpty()) {
-            CoilImage(movie.image)
+            CoilImage(movie.image,false)
         }
     }
 }
 
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun movieInfo(title:String,url:String){
     val decodeTitle = Uri.decode(title)
@@ -218,8 +220,8 @@ fun movieInfo(title:String,url:String){
             contentAlignment = Alignment.Center
         ){
             Column {
-                Box(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                    CoilImage(decodeUrl)
+                Box(modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)) {
+                    CoilImage(decodeUrl,true) // true means give whole width image
                 }
                 Text(
                     decodeTitle,
@@ -308,7 +310,7 @@ fun DesignSearch(url:String,name:String,rating:String){
         ) {
             // Image on the left
            Card {
-               CoilImage(url)
+               CoilImage(url,false)
            }
             // Text in the center of remaining space
             Box(
@@ -330,9 +332,18 @@ fun DesignSearch(url:String,name:String,rating:String){
 
 
 @Composable
-fun CoilImage(url:String){
+fun CoilImage(url: String,isBig:Boolean) {
     val context = LocalContext.current
-    AsyncImage(model = url,
+    if(isBig){
+        AsyncImage(
+            model = url,
+            contentDescription = null,
+            modifier = Modifier.fillMaxWidth()
+        )
+        return
+    }
+    AsyncImage(
+        model = url,
         contentDescription = null,
     )
 }
